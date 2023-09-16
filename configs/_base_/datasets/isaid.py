@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'iSAIDDataset'
-data_root = '/home/lyu4/lwl_wp/mmsegmentation/data/iSAID'
+data_root = '/home/lyu4/lwl_wsp/mmsegmentation/data/iSAID'
 """
 This crop_size setting is followed by the implementation of
 `PointFlow: Flowing Semantics Through Points for Aerial Image
@@ -75,7 +75,7 @@ test_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
-        data_prefix=dict(img_path='img_dir/test', seg_map_path='ann_dir/test'),
+        data_prefix=dict(img_path='img_dir/val', seg_map_path='ann_dir/val'),
         pipeline=test_pipeline))
 test_dataloader = test_dataloader
 

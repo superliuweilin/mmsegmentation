@@ -3,13 +3,13 @@ _base_ = [
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_80k.py'
 ]
 # crop_size=(140, 140)
-work_dir = '/home/lyu4/lwl_wsp/mmsegmentation/lwl_work_dirs/csavit_512x512_loveda_80k'
+work_dir = '/home/lyu4/lwl_wsp/mmsegmentation/lwl_work_dirs/csavit_512x512_loveda_80k_batch_size_1'
 norm_cfg = dict(type='BN', requires_grad=True)
 model = dict(
     type='EncoderDecoder',
     backbone=dict(
         type='MobileViT',
-        image_size=(1024, 1024),
+        image_size=(512, 512),
         input_channel=3,
         dims=[144, 192, 240],
         channels=[16, 32, 64, 64, 96, 128, 160, 640],
@@ -22,7 +22,7 @@ model = dict(
         dropout=0.1,
         window_size=7,
         num_classes=7,
-        resolutions=[(256, 256), (128, 128), (64, 64), (32, 32)],
+        resolutions=[(128, 128), (64, 64), (32, 32), (16, 16)],
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)))
 crop_size = (512, 512)

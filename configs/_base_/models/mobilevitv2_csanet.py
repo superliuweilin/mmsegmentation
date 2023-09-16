@@ -11,11 +11,11 @@ model = dict(
     data_preprocessor=data_preprocessor,
     backbone=dict(
         type='MobileViT',
-        input_channel=6,
-        image_size=(1024, 1024),
+        input_channel=3,
+        image_size=(896, 896),
         dims=[144, 192, 240],
         channels=[16, 32, 64, 64, 96, 128, 160, 640],
-        num_classes=2),
+        num_classes=16),
     decode_head=dict(
         type='CSAHead',
         in_channels=(64, 96, 128, 640),
@@ -23,8 +23,8 @@ model = dict(
         channels=64,
         dropout=0.1,
         window_size=7,
-        num_classes=2,
-        resolutions=[(40, 120), (40, 120), (20, 60), (10, 30)],
+        num_classes=16,
+        resolutions=[(224, 224), (112, 112), (56, 56), (28, 28)],
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     # model training and testing settings

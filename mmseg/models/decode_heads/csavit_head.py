@@ -862,11 +862,11 @@ class EfficientViT(torch.nn.Module):
         self.blocks2 = torch.nn.Sequential(*self.blocks2)
         self.blocks3 = torch.nn.Sequential(*self.blocks3)
 
-        # Classification head
-        self.head = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
-        self.distillation = distillation
-        if distillation:
-            self.head_dist = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
+        # # Classification head
+        # self.head = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
+        # self.distillation = distillation
+        # if distillation:
+        #     self.head_dist = BN_Linear(embed_dim[-1], num_classes) if num_classes > 0 else torch.nn.Identity()
 
     @torch.jit.ignore
     def no_weight_decay(self):

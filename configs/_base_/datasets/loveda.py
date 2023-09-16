@@ -27,10 +27,11 @@ val_pipeline = [
 ]
 test_pipeline = [
     dict(type='LoadImageFromFile'),
-    # dict(type='Resize', scale=(1024, 1024), keep_ratio=True),
+    # dict(type='Resize', scale=(512, 512), keep_ratio=True),
     # add loading annotation after ``Resize`` because ground truth
     # does not need to do resize data transform
     # dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.75),
+    
     dict(type='LoadAnnotations', reduce_zero_label=True),
     dict(type='PackSegInputs')
 ]
@@ -51,7 +52,7 @@ tta_pipeline = [
         ])
 ]
 train_dataloader = dict(
-    batch_size=1,
+    batch_size=8,
     num_workers=4,
     persistent_workers=True,
     sampler=dict(type='InfiniteSampler', shuffle=True),

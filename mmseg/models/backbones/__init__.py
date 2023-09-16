@@ -29,6 +29,13 @@ from .edgevit import EdgeVit
 from .cmt import CMT
 from .lvt import LVT
 from .flatten_pvt import FlattenPvt
+from .pvtv2 import PVTV2
+from .flatten_pvtv2 import FlattenPVTv2
+from .efficientvit import EfficientViT
+from .efficientvit_pconv import EfficientPcViT
+from .efficientvit_pconv_2 import EfficientPcViT2
+from .efficientvit_pconv_8 import EfficientPcViT8
+from .efficientvit_pconv_16 import EfficientPcViT16
 
 __all__ = [
     'ResNet', 'ResNetV1c', 'ResNetV1d', 'ResNeXt', 'HRNet', 'FastSCNN',
@@ -36,5 +43,6 @@ __all__ = [
     'VisionTransformer', 'SwinTransformer', 'MixVisionTransformer',
     'BiSeNetV1', 'BiSeNetV2', 'ICNet', 'TIMMBackbone', 'ERFNet', 'PCPVT',
     'SVT', 'STDCNet', 'STDCContextPathNet', 'BEiT', 'MAE', 'PIDNet', 'MSCAN',
-    'DDRNet', 'MobileViT', 'PVT', 'EdgeVit', 'CMT', 'LVT', 'FlattenPvt'
+    'DDRNet', 'MobileViT', 'PVT', 'EdgeVit', 'CMT', 'LVT', 'FlattenPvt', 'PVTV2', 'FlattenPVTv2', 'EfficientViT', 
+    'EfficientPcViT', 'EfficientPcViT2', 'EfficientPcViT8', 'EfficientPcViT16'
 ]

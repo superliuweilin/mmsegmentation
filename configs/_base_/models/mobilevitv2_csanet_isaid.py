@@ -16,14 +16,15 @@ model = dict(
         dims=[144, 192, 240],
         channels=[16, 32, 64, 64, 96, 128, 160, 640],
         num_classes=16),
-    decode_head=dict(
-        type='',
-        encoder_channels=(64, 96, 128, 640),
-        decode_channels=64,
+      decode_head=dict(
+        type='CSAHead',
+        in_channels=(64, 96, 128, 640),
+        in_index=[0, 1, 2, 3],
+        channels=64,
         dropout=0.1,
         window_size=7,
-        num_classes=16,
-        resolutions=[128, 64, 32, 16],
+        num_classes=2,
+        resolutions=[(40, 120), (40, 120), (20, 60), (10, 30)],
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
     # model training and testing settings

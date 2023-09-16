@@ -192,39 +192,39 @@ class FeedForward(nn.Module):
         return self.net(x)
 
 
-class Attention(nn.Module):
-    def __init__(self, dim, heads, head_dim, dropout):
-        super().__init__()
-        inner_dim = heads * head_dim
-        project_out = not (heads == 1 and head_dim == dim)
-        '''如果head==1并且head_dim==dim,project_out=False,否则project_out=True'''
+# class Attention(nn.Module):
+#     def __init__(self, dim, heads, head_dim, dropout):
+#         super().__init__()
+#         inner_dim = heads * head_dim
+#         project_out = not (heads == 1 and head_dim == dim)
+#         '''如果head==1并且head_dim==dim,project_out=False,否则project_out=True'''
 
-        self.heads = heads
-        self.scale = head_dim ** -0.5
+#         self.heads = heads
+#         self.scale = head_dim ** -0.5
 
-        self.attend = nn.Softmax(dim=-1)
-        self.to_qkv = nn.Linear(dim, inner_dim * 3, bias=False)
+#         self.attend = nn.Softmax(dim=-1)
+#         self.to_qkv = nn.Linear(dim, inner_dim * 3, bias=False)
 
-        self.to_out = nn.Sequential(
-            nn.Linear(inner_dim, dim),
-            nn.Dropout(dropout)
-        ) if project_out else nn.Identity()
+#         self.to_out = nn.Sequential(
+#             nn.Linear(inner_dim, dim),
+#             nn.Dropout(dropout)
+#         ) if project_out else nn.Identity()
 
-    def forward(self, x):
-        # print(x.shape)
-        qkv = self.to_qkv(x).chunk(3, dim=-1)
-        # print('qkv', qkv[0].shape)
-        # chunk对数组进行分组,3表示组数，dim表示在哪一个维度.这里返回的qkv为一个包含三组张量的元组
-        q, k, v = map(lambda t: rearrange(t, 'b p n (h d) -> b p h n d', h=self.heads), qkv)
-        # print(q.shape)
-        # print(k.shape)
-        # print(v.shape)
-        dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
-        attn = self.attend(dots)
-        out = torch.matmul(attn, v)
-        out = rearrange(out, 'b p h n d -> b p n (h d)')
-        # print('self.to_out', self.to_out(out).shape)
-        return self.to_out(out)
+#     def forward(self, x):
+#         # print(x.shape)
+#         qkv = self.to_qkv(x).chunk(3, dim=-1)
+#         # print('qkv', qkv[0].shape)
+#         # chunk对数组进行分组,3表示组数，dim表示在哪一个维度.这里返回的qkv为一个包含三组张量的元组
+#         q, k, v = map(lambda t: rearrange(t, 'b p n (h d) -> b p h n d', h=self.heads), qkv)
+#         # print(q.shape)
+#         # print(k.shape)
+#         # print(v.shape)
+#         dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
+#         attn = self.attend(dots)
+#         out = torch.matmul(attn, v)
+#         out = rearrange(out, 'b p h n d -> b p n (h d)')
+#         # print('self.to_out', self.to_out(out).shape)
+#         return self.to_out(out)
 
 
 class Transformer(nn.Module):
@@ -342,7 +342,7 @@ def count_paratermeters(model):
 
 
 if __name__ == '__main__':
-    input = torch.randn(1, 3, 1024, 1024)
+    input = torch.randn(1, 3, 896, 896)
 
     ### mobilevit_xxs
     mvit_xxs = mobilevit_s()
